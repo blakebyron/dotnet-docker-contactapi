@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  sqldata:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: contact-mssql
+
+  contact.api:
+    image: ${DOCKER_REGISTRY-}contact
+    container_name: contact-api
+
+    build:
+      context: .
+      dockerfile: Contact.Api/Dockerfile
+    depends_on:
+      - sqldata
