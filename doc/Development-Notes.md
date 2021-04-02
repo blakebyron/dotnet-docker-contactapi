@@ -49,7 +49,7 @@ dotnet ef migrations script 0 initialcreate --output Sql/Initialcreate.sql --ide
 
 Checks for any pending migrations. If none are found then healthy is returned otherwise unhealthy is returned. Useful to automate the process of checking if migrations are succesfully deployed.
 
-The simulate a pending migration add a new property to the contact class e.g. PhoneNumber. Then run the following command. Next run the app, the health endpoint should return unhealthy for the migrations.
+The simulate a pending migration add a new property to the contact class e.g. PhoneNumber. Then run the following command. Next run the app, the health endpoint should return unhealthy and display a count of the pending migrations.
 
 ```
 dotnet ef migrations add AddPhoneNumber --output-dir "Data/Migrations" --namespace Data.Migrations
