@@ -1,4 +1,5 @@
 ﻿using System;
+using Contact.Infrastructure.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -13,7 +14,7 @@ namespace Contact.Api.Infrastructure.HealthChecks
 
             hcBuilder.AddCheck("self", () => HealthCheckResult.Healthy());
 
-            string t = configuration["ConnectionString"];
+            //string t = configuration["ConnectionString"];
 
 
             hcBuilder
@@ -21,6 +22,9 @@ namespace Contact.Api.Infrastructure.HealthChecks
                     configuration["ConnectionString"],
                     name: "ContactDb-check",
                     tags: new string[] { "contactdb" });
+
+            hcBuilder
+                .AddCheck<EntityFrameworkPendingMigrationHealthCheck<ContactDbContext>>("contactdb-migration-check");
 
             return services;
         }
