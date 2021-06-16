@@ -1,5 +1,8 @@
 version: '3.4'
 
+networks:
+    contactapi-network:
+
 services:
   sqldata:
     image: mcr.microsoft.com/mssql/server:2019-latest
@@ -14,3 +17,6 @@ services:
       dockerfile: Contact.Api/Dockerfile
     depends_on:
       - sqldata
+
+    networks:
+      - contactapi-network
